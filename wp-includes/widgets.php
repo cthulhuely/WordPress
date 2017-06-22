@@ -114,10 +114,10 @@ function register_widget($widget_class) {
 }
 
 /**
- * Unregister a widget
+ * Unregisters a widget.
  *
- * Unregisters a WP_Widget widget. Useful for unregistering default widgets.
- * Run within a function hooked to the widgets_init action.
+ * Unregisters a WP_Widget widget. Useful for un-registering default widgets.
+ * Run within a function hooked to the {@see 'widgets_init'} action.
  *
  * @since 2.8.0
  *
@@ -125,7 +125,7 @@ function register_widget($widget_class) {
  *
  * @global WP_Widget_Factory $wp_widget_factory
  *
- * @param string $widget_class The name of a class that extends WP_Widget
+ * @param string $widget_class The name of a class that extends WP_Widget.
  */
 function unregister_widget($widget_class) {
 	global $wp_widget_factory;
@@ -281,12 +281,12 @@ function register_sidebar($args = array()) {
  *
  * @global array $wp_registered_sidebars Stores the new sidebar in this array by sidebar ID.
  *
- * @param string $name The ID of the sidebar when it was added.
+ * @param string|int $sidebar_id The ID of the sidebar when it was registered.
  */
-function unregister_sidebar( $name ) {
+function unregister_sidebar( $sidebar_id ) {
 	global $wp_registered_sidebars;
 
-	unset( $wp_registered_sidebars[ $name ] );
+	unset( $wp_registered_sidebars[ $sidebar_id ] );
 }
 
 /**
@@ -521,7 +521,7 @@ function wp_register_widget_control( $id, $name, $control_callback, $options = a
  *
  * @param string   $id_base         The base ID of a widget created by extending WP_Widget.
  * @param callable $update_callback Update callback method for the widget.
- * @param array    $options         Optional. Widget control options. See {@see wp_register_widget_control()}.
+ * @param array    $options         Optional. Widget control options. See wp_register_widget_control().
  *                                  Default empty array.
  */
 function _register_widget_update_callback( $id_base, $update_callback, $options = array() ) {
@@ -552,7 +552,7 @@ function _register_widget_update_callback( $id_base, $update_callback, $options 
  * @param int|string $id            Widget ID.
  * @param string     $name          Name attribute for the widget.
  * @param callable   $form_callback Form callback.
- * @param array      $options       Optional. Widget control options. See {@see wp_register_widget_control()}.
+ * @param array      $options       Optional. Widget control options. See wp_register_widget_control().
  *                                  Default empty array.
  */
 function _register_widget_form_callback($id, $name, $form_callback, $options = array()) {
@@ -638,8 +638,8 @@ function dynamic_sidebar( $index = 1 ) {
 	/**
 	 * Fires before widgets are rendered in a dynamic sidebar.
 	 *
-	 * Note: The action also fires for empty sidebars, and on both the front-end
-	 * and back-end, including the Inactive Widgets sidebar on the Widgets screen.
+	 * Note: The action also fires for empty sidebars, and on both the front end
+	 * and back end, including the Inactive Widgets sidebar on the Widgets screen.
 	 *
 	 * @since 3.9.0
 	 *
@@ -672,9 +672,9 @@ function dynamic_sidebar( $index = 1 ) {
 		$params[0]['before_widget'] = sprintf($params[0]['before_widget'], $id, $classname_);
 
 		/**
-		 * Filter the parameters passed to a widget's display callback.
+		 * Filters the parameters passed to a widget's display callback.
 		 *
-		 * Note: The filter is evaluated on both the front-end and back-end,
+		 * Note: The filter is evaluated on both the front end and back end,
 		 * including for the Inactive Widgets sidebar on the Widgets screen.
 		 *
 		 * @since 2.5.0
@@ -710,7 +710,7 @@ function dynamic_sidebar( $index = 1 ) {
 		/**
 		 * Fires before a widget's display callback is called.
 		 *
-		 * Note: The action fires on both the front-end and back-end, including
+		 * Note: The action fires on both the front end and back end, including
 		 * for widgets in the Inactive Widgets sidebar on the Widgets screen.
 		 *
 		 * The action is not fired for empty sidebars.
@@ -722,13 +722,13 @@ function dynamic_sidebar( $index = 1 ) {
 		 *
 		 *     @type string $name                Name of the widget.
 		 *     @type string $id                  Widget ID.
-		 *     @type array|callable $callback    When the hook is fired on the front-end, $callback is an array
-		 *                                       containing the widget object. Fired on the back-end, $callback
+		 *     @type array|callable $callback    When the hook is fired on the front end, $callback is an array
+		 *                                       containing the widget object. Fired on the back end, $callback
 		 *                                       is 'wp_widget_control', see $_callback.
 		 *     @type array          $params      An associative array of multi-widget arguments.
 		 *     @type string         $classname   CSS class applied to the widget container.
 		 *     @type string         $description The widget description.
-		 *     @type array          $_callback   When the hook is fired on the back-end, $_callback is populated
+		 *     @type array          $_callback   When the hook is fired on the back end, $_callback is populated
 		 *                                       with an array containing the widget object, see $callback.
 		 * }
 		 */
@@ -743,8 +743,8 @@ function dynamic_sidebar( $index = 1 ) {
 	/**
 	 * Fires after widgets are rendered in a dynamic sidebar.
 	 *
-	 * Note: The action also fires for empty sidebars, and on both the front-end
-	 * and back-end, including the Inactive Widgets sidebar on the Widgets screen.
+	 * Note: The action also fires for empty sidebars, and on both the front end
+	 * and back end, including the Inactive Widgets sidebar on the Widgets screen.
 	 *
 	 * @since 3.9.0
 	 *
@@ -755,10 +755,10 @@ function dynamic_sidebar( $index = 1 ) {
 	do_action( 'dynamic_sidebar_after', $index, true );
 
 	/**
-	 * Filter whether a sidebar has widgets.
+	 * Filters whether a sidebar has widgets.
 	 *
-	 * Note: The filter is also evaluated for empty sidebars, and on both the front-end
-	 * and back-end, including the Inactive Widgets sidebar on the Widgets screen.
+	 * Note: The filter is also evaluated for empty sidebars, and on both the front end
+	 * and back end, including the Inactive Widgets sidebar on the Widgets screen.
 	 *
 	 * @since 3.9.0
 	 *
@@ -770,7 +770,7 @@ function dynamic_sidebar( $index = 1 ) {
 }
 
 /**
- * Whether widget is displayed on the front-end.
+ * Whether widget is displayed on the front end.
  *
  * Either $callback or $id_base can be used
  * $id_base is the first argument when extending WP_Widget class
@@ -780,7 +780,7 @@ function dynamic_sidebar( $index = 1 ) {
  * the widget with that callback/$id_base AND that ID is found.
  *
  * NOTE: $widget_id and $id_base are the same for single widgets. To be effective
- * this function has to run after widgets have initialized, at action 'init' or later.
+ * this function has to run after widgets have initialized, at action {@see 'init'} or later.
  *
  * @since 2.2.0
  *
@@ -830,7 +830,7 @@ function is_dynamic_sidebar() {
 	global $wp_registered_widgets, $wp_registered_sidebars;
 	$sidebars_widgets = get_option('sidebars_widgets');
 	foreach ( (array) $wp_registered_sidebars as $index => $sidebar ) {
-		if ( count($sidebars_widgets[$index]) ) {
+		if ( ! empty( $sidebars_widgets[ $index ] ) ) {
 			foreach ( (array) $sidebars_widgets[$index] as $widget )
 				if ( array_key_exists($widget, $wp_registered_widgets) )
 					return true;
@@ -853,7 +853,7 @@ function is_active_sidebar( $index ) {
 	$is_active_sidebar = ! empty( $sidebars_widgets[$index] );
 
 	/**
-	 * Filter whether a dynamic sidebar is considered "active".
+	 * Filters whether a dynamic sidebar is considered "active".
 	 *
 	 * @since 3.9.0
 	 *
@@ -904,7 +904,7 @@ function wp_get_sidebars_widgets( $deprecated = true ) {
 		unset($sidebars_widgets['array_version']);
 
 	/**
-	 * Filter the list of sidebars and their widgets.
+	 * Filters the list of sidebars and their widgets.
 	 *
 	 * @since 2.7.0
 	 *
@@ -1233,7 +1233,7 @@ function wp_widget_rss_output( $rss, $args = array() ) {
 
 	if ( is_wp_error($rss) ) {
 		if ( is_admin() || current_user_can('manage_options') )
-			echo '<p>' . sprintf( __('<strong>RSS Error</strong>: %s'), $rss->get_error_message() ) . '</p>';
+			echo '<p><strong>' . __( 'RSS Error:' ) . '</strong> ' . $rss->get_error_message() . '</p>';
 		return;
 	}
 
@@ -1342,7 +1342,7 @@ function wp_widget_rss_form( $args, $inputs = null ) {
 	$args['show_date']      = isset( $args['show_date'] ) ? (int) $args['show_date'] : (int) $inputs['show_date'];
 
 	if ( ! empty( $args['error'] ) ) {
-		echo '<p class="widget-error"><strong>' . sprintf( __( 'RSS Error: %s' ), $args['error'] ) . '</strong></p>';
+		echo '<p class="widget-error"><strong>' . __( 'RSS Error:' ) . '</strong> ' . $args['error'] . '</p>';
 	}
 
 	$esc_number = esc_attr( $args['number'] );
@@ -1429,43 +1429,52 @@ function wp_widget_rss_process( $widget_rss, $check_feed = true ) {
 }
 
 /**
- * Register all of the default WordPress widgets on startup.
+ * Registers all of the default WordPress widgets on startup.
  *
- * Calls 'widgets_init' action after all of the WordPress widgets have been
- * registered.
+ * Calls {@see 'widgets_init'} action after all of the WordPress widgets have been registered.
  *
  * @since 2.2.0
  */
 function wp_widgets_init() {
-	if ( !is_blog_installed() )
+	if ( ! is_blog_installed() ) {
 		return;
+	}
 
-	register_widget('WP_Widget_Pages');
+	register_widget( 'WP_Widget_Pages' );
 
-	register_widget('WP_Widget_Calendar');
+	register_widget( 'WP_Widget_Calendar' );
 
-	register_widget('WP_Widget_Archives');
+	register_widget( 'WP_Widget_Archives' );
 
-	if ( get_option( 'link_manager_enabled' ) )
-		register_widget('WP_Widget_Links');
+	if ( get_option( 'link_manager_enabled' ) ) {
+		register_widget( 'WP_Widget_Links' );
+	}
 
-	register_widget('WP_Widget_Meta');
+	register_widget( 'WP_Widget_Media_Audio' );
 
-	register_widget('WP_Widget_Search');
+	register_widget( 'WP_Widget_Media_Image' );
 
-	register_widget('WP_Widget_Text');
+	register_widget( 'WP_Widget_Media_Video' );
 
-	register_widget('WP_Widget_Categories');
+	register_widget( 'WP_Widget_Meta' );
 
-	register_widget('WP_Widget_Recent_Posts');
+	register_widget( 'WP_Widget_Search' );
 
-	register_widget('WP_Widget_Recent_Comments');
+	register_widget( 'WP_Widget_Text' );
 
-	register_widget('WP_Widget_RSS');
+	register_widget( 'WP_Widget_Categories' );
 
-	register_widget('WP_Widget_Tag_Cloud');
+	register_widget( 'WP_Widget_Recent_Posts' );
 
-	register_widget('WP_Nav_Menu_Widget');
+	register_widget( 'WP_Widget_Recent_Comments' );
+
+	register_widget( 'WP_Widget_RSS' );
+
+	register_widget( 'WP_Widget_Tag_Cloud' );
+
+	register_widget( 'WP_Nav_Menu_Widget' );
+
+	register_widget( 'WP_Widget_HTML_Code' );
 
 	/**
 	 * Fires after all default WordPress widgets have been registered.
